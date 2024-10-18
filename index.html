@@ -19,6 +19,17 @@
     <script>
       // Students need to implement the JavaScript code here
       // This includes fetching data from the REST API and handling the responses.
+      const baseUrl = "http://localhost:3000/teams";
+      document.getElementById("getAllTeams").addEventListener("click", () => {
+        fetch(baseUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      });
     </script>
   </body>
 </html>
