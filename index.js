@@ -28,7 +28,7 @@ mongoose
 
 // test route
 app.get('/', (req, res) => {
-    res.send('Welcome to App');
+    res.send('Welcome to the App');
 });
 
 //set the port
