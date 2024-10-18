@@ -24,7 +24,20 @@
         fetch(baseUrl)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            const resultsElement = document.getElementById("results");
+            resultsElement.textContent = "";
+
+            // Iterate through the JSON data and format it line by line
+            data?.data.forEach((team, index) => {
+              resultsElement.textContent += `Team ${index + 1}:\n`;
+
+              // Loop through each property in the team object
+              for (const [key, value] of Object.entries(team)) {
+                resultsElement.textContent += `${key}: ${value}\n`;
+              }
+
+              resultsElement.textContent += "\n";
+            });
           })
           .catch((error) => {
             console.error(error);
