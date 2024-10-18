@@ -20,6 +20,8 @@
       // Students need to implement the JavaScript code here
       // This includes fetching data from the REST API and handling the responses.
       const baseUrl = "http://localhost:3000/teams";
+
+      // Get all teams data
       document.getElementById("getAllTeams").addEventListener("click", () => {
         fetch(baseUrl)
           .then((response) => response.json())
@@ -38,6 +40,27 @@
 
               results.textContent += "\n";
             });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      });
+
+      //get team data by id
+      document.getElementById("getTeamById").addEventListener("click", () => {
+        const id = prompt("Enter team id to fetch: ");
+        fetch(`${baseUrl}/${id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            results.textContent = "";
+            results.textContent += `Team:\n`;
+
+            // Loop through each property in the team object
+            for (const [key, value] of Object.entries(data)) {
+              results.textContent += `${key}: ${value}\n`;
+            }
+
+            results.textContent += "\n";
           })
           .catch((error) => {
             console.error(error);
