@@ -48,4 +48,24 @@ getAllTeams = async (req, res) => {
   }
 };
 
-module.exports = {importTeams, getAllTeams}
+/**
+ * Function to get teams data from database based on id.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {void} - Returns team data on success or an error message.
+ */
+
+getTeamById = async (req, res) => {
+  try {
+    const team = await Teams.findById(req.params.id);
+    if (!team) {
+      return res.status(404).send("Team not found");
+    }
+    res.status(201).json(team);
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Error retrieving the team");
+  }
+};
+
+module.exports = {importTeams, getAllTeams, getTeamById}
