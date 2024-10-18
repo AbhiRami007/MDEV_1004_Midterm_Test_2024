@@ -10,7 +10,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 const express = require("express");
 const mongoose = require("mongoose");
-
+const teamsRoutes = require("./src/routes/teamsRoute")
 //initialise express app
 const app = express();
 
@@ -30,6 +30,9 @@ mongoose
 app.get('/', (req, res) => {
     res.send('Welcome to the App');
 });
+
+//Use the teams routes
+app.use('/teams', teamsRoutes);
 
 //set the port
 const PORT = process.env.PORT || 3000;
