@@ -47,10 +47,13 @@ getAllTeams = async (req, res) => {
       query.city = city
     }
     const teams = await Teams.find(query);
+    if(!teams.length){
+      return res.status(404).send({message: "No teams data"});
+    }
     res.status(200).json({message: "Teams data fetched", data: teams});
   } catch (e) {
     console.error(e);
-    res.status(500).send("Error retrieving teams data");
+    res.status(500).send({message: "Error retrieving teams data"});
   }
 };
 
@@ -65,17 +68,17 @@ getTeamById = async (req, res) => {
   try {
   let team;
   if (!isNaN(req.params.id)) {
-    team = await Teams.find({ teamId: req.params.id });
+    team = await Teams.findOne({ teamId: Number(req.params.id) });
   } else {
     team = await Teams.findById(req.params.id);
   }
   if(!team){
-    return res.status(404).send("Team not found");
+    return res.status(404).send({message: "Team not found"});
   }
-    res.status(201).json(team);
+    res.status(201).json({message: "Team data fetched", data:team});
   } catch (e) {
     console.error(e);
-    res.status(500).send("Error retrieving the team");
+    res.status(500).send({message: "Error retrieving the team"});
   }
 };
 
