@@ -82,4 +82,17 @@ getTeamById = async (req, res) => {
   }
 };
 
-module.exports = {importTeams, getAllTeams, getTeamById}
+getTeamsByCity = async (req, res) => {
+  try {
+    const teams = await Teams.find({city:req.params.city});
+    if(!teams.length){
+      return res.status(404).send({message: "No teams data"});
+    }
+    res.status(200).json({message: "Teams data fetched", data: teams});
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({message: "Error retrieving teams data"});
+  }
+};
+
+module.exports = {importTeams, getAllTeams, getTeamById, getTeamsByCity}

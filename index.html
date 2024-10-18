@@ -80,7 +80,7 @@
         .getElementById("getTeamsByCity")
         .addEventListener("click", () => {
           const city = prompt("Enter city name to fetch team data: ");
-          fetch(`${baseUrl}?city=${city}`)
+          fetch(`${baseUrl}/${city}`)
             .then((response) => response.json())
             .then((data) => {
               results.textContent = "";
