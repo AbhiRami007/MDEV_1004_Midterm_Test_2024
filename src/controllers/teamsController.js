@@ -40,7 +40,13 @@ importTeams = async (req, res) => {
 
 getAllTeams = async (req, res) => {
   try {
-    const teams = await Teams.find();
+    const query ={}
+    // Extract query parameter for filtering by city
+    const { city } = req.query;
+    if(city){
+      query.city = city
+    }
+    const teams = await Teams.find(query);
     res.status(200).json({message: "Teams data fetched", data: teams});
   } catch (e) {
     console.error(e);
