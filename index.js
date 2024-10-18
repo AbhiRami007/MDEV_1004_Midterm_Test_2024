@@ -10,9 +10,12 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors');
 const teamsRoutes = require("./src/routes/teamsRoute")
 //initialise express app
 const app = express();
+
+app.use(cors());
 
 //MongoDB Atlas connection string
 const mongoURI = process.env.MONGO_URI;

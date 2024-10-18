@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/AbhiRami007/MDEV_1004_Midterm_Test_2024#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.2",
