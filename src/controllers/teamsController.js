@@ -63,10 +63,15 @@ getAllTeams = async (req, res) => {
 
 getTeamById = async (req, res) => {
   try {
-    const team = await Teams.findById(req.params.id);
-    if (!team) {
-      return res.status(404).send("Team not found");
-    }
+  let team;
+  if (!isNaN(req.params.id)) {
+    team = await Teams.find({ teamId: req.params.id });
+  } else {
+    team = await Teams.findById(req.params.id);
+  }
+  if(!team){
+    return res.status(404).send("Team not found");
+  }
     res.status(201).json(team);
   } catch (e) {
     console.error(e);
