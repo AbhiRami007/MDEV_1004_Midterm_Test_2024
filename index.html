@@ -66,6 +66,21 @@
             console.error(error);
           });
       });
+
+      //get team data by city
+      document
+        .getElementById("getTeamsByCity")
+        .addEventListener("click", () => {
+          const city = prompt("Enter city name to fetch team data: ");
+          fetch(`${baseUrl}?city=${city}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
     </script>
   </body>
 </html>
