@@ -31,4 +31,21 @@ importTeams = async (req, res) => {
   }
 };
 
-module.exports = {importTeams}
+/**
+ * Function to get all teams data from database.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {void} - Returns success message with teams data or an error message.
+ */
+
+getAllTeams = async (req, res) => {
+  try {
+    const teams = await Teams.find();
+    res.status(200).json({message: "Teams data fetched", data: teams});
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Error retrieving teams data");
+  }
+};
+
+module.exports = {importTeams, getAllTeams}
